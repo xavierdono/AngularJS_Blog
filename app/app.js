@@ -1,7 +1,13 @@
 (function () {
     'use strict';
 
-    angular.module('night', ['ngRoute'])
+    angular.module('night',
+        [
+            'ngRoute', 
+            'firebase',
+
+            'night.post'
+        ])
 
         .config(['$routeProvider', function ($routeProvider) {
             $routeProvider

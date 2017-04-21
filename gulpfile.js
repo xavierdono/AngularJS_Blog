@@ -92,5 +92,5 @@ gulp.task('dev', ['browserSync', 'less', 'minify-css', 'minify-js'], function() 
     gulp.watch('templates/*.html', browserSync.reload);
     gulp.watch('js/**/*.js', browserSync.reload);
     gulp.watch('partials/**/*.js', browserSync.reload);
-    //gulp.watch('app/**/*.js', browserSync.reload);
+    gulp.watch('app/**/*.js', browserSync.reload);
 });

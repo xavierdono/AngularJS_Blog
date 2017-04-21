@@ -1,20 +1,22 @@
-(function() {
-'use strict';
+(function () {
+    'use strict';
 
     angular
         .module('night')
         .controller('HomeCtrl', HomeCtrl);
 
-    HomeCtrl.inject = ['$scope'];
-    
-    function HomeCtrl($scope) {
+    HomeCtrl.inject = ['$scope', 'Post'];
+
+    function HomeCtrl($scope, Post) {
         var vm = this;
-        
+
 
         activate();
 
         ////////////////
 
-        function activate() { }
+        function activate() {
+            $scope.posts = Post.all();
+        }
     }
 })();

@@ -5,9 +5,9 @@
         .module('night')
         .controller('PostCtrl', PostCtrl);
 
-    PostCtrl.inject = ['$scope'];
+    PostCtrl.inject = ['$scope', '$routeParams', 'Post'];
     
-    function PostCtrl($scope) {
+    function PostCtrl($scope, $routeParams, Post) {
         var vm = this;
         
 
@@ -15,6 +15,8 @@
 
         ////////////////
 
-        function activate() { }
+        function activate() {
+            $scope.post = Post.id($routeParams.idPost);
+        }
     }
 })();
