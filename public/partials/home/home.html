@@ -1,8 +1,8 @@
 <div class="container">
     <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" ng-repeat="post in posts">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" ng-repeat="post in home.posts">
             <div class="post-preview">
-                <a href="#!/post/{{ post.$id }}">
+                <a href="#!/post/{{ post._id }}">
                     <h2 class="post-title">
                         {{ post.title }}
                     </h2>
@@ -14,5 +14,8 @@
             </div>
             <hr>
         </div>
+        <!--
+        <button ng-click="home.create()">Create</button>
+        -->
     </div>
 </div>

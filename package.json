@@ -28,6 +28,11 @@
     "angular": "^1.6.4",
     "angular-route": "^1.6.4",
     "angularfire": "^2.3.0",
-    "firebase": "^3.8.0"
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "firebase": "^3.8.0",
+    "method-override": "^2.3.8",
+    "mongoose": "^4.9.7",
+    "morgan": "^1.8.1"
   }
 }

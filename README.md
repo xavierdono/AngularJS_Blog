@@ -1,6 +1,8 @@
 # Tutorial
 
-Faire un blog en Angular + FireBase
+Faire un blog en Angular + FireBase (1/2 commit) / MongoDB (dernier commit)
+
+* nodemon .\server.js
 
 
 ## [Start Bootstrap](http://startbootstrap.com/) - [Clean Blog](http://startbootstrap.com/template-overviews/clean-blog/)

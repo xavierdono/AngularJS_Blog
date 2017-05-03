@@ -3,15 +3,15 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <h2 class="post-title">
-                    {{ post.title }}
+                    {{ post.post.title }}
                 </h2>
                 <h3 class="post-subtitle">
-                    {{ post.desc }}
+                    {{ post.post.desc }}
                 </h3>
                 <p>
-                    {{ post.body }}
+                    {{ post.post.body }}
                 </p>
-                <p>Posted by {{ post.user }} on {{ post.date }}</p>
+                <p>Posted by {{ post.post.user }} on {{ post.post.date }}</p>
             </div>
         </div>
     </div>
