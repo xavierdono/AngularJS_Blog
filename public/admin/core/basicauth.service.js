@@ -7,7 +7,7 @@
 
     function BasicAuth() {
 
-        var auth = true;
+        var auth = false;
 
         var service = {
             isConnected: isConnected,

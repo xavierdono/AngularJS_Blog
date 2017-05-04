@@ -46,15 +46,17 @@
         }
 
         function deletePost(post) {
-            Post.del(post._id).then(function (data) {
-                vm.success = true;
-                vm.message = data.message;
-                vm.editPost = {};
-                activate();
-            }).catch(function (data) {
-                vm.error = true;
-                vm.message = data;
-            });
+            if (post._id) {
+                Post.del(post._id).then(function (data) {
+                    vm.success = true;
+                    vm.message = data.message;
+                    vm.editPost = {};
+                    activate();
+                }).catch(function (data) {
+                    vm.error = true;
+                    vm.message = data;
+                });
+            }
         }
 
         function managePost(post) {

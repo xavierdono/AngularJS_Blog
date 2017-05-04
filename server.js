@@ -6,6 +6,7 @@ var morgan = require('morgan');             // log requests to the console (expr
 var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
 var config = require('./config/config'); // config of mongodb
 var routePost = require('./routes/posts.route.js');
+var routeUser = require('./routes/users.route.js');
 
 // configuration =================
 var db = 'mongodb://' + config.username + ':' + config.password + '@' + config.host + ':' + config.port + '/' + config.db;
@@ -22,8 +23,9 @@ app.get('/', function (req, res) {
     res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
 });
 
-// Route Post
+// Routes
 app.use('/api', routePost);
+app.use('/api', routeUser);
 
 // listen (start app with node server.js) ======================================
 app.listen(8080);

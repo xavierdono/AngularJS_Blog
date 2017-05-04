@@ -73,7 +73,7 @@ router.route('/posts/:post_id')
             post.user = req.body.user;
             post.date = req.body.date;
 
-            // save the bear
+            // save the post
             post.save(function (err) {
                 if (err)
                     res.send(err);
@@ -88,7 +88,7 @@ router.route('/posts/:post_id')
     .delete(function (req, res) {
         Post.remove({
             _id: req.params.post_id
-        }, function (err, bear) {
+        }, function (err, post) {
             if (err)
                 res.send(err);
 

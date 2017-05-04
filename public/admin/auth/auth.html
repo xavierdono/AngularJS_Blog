@@ -1,11 +1,15 @@
 <div class="wrapper_auth">
-    <form action="" method="post" name="Login_Form" class="form-signin">
+    <form method="post" name="Login_Form" class="form-signin">
         <h3 class="form-signin-heading">Bienvenue</h3>
         <hr class="colorgraph"><br>
 
-        <input type="text" class="form-control" name="Username" placeholder="Username" required="" autofocus="" />
-        <input type="password" class="form-control" name="Password" placeholder="Password" required="" />
+        <input type="text" class="form-control" name="Username" ng-model="user.username" placeholder="Username" required="" autofocus=""
+        />
+        <input type="password" class="form-control" name="Password" ng-model="user.password" placeholder="Password" required="" />
 
-        <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit">Login</button>
+        <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" ng-click="auth.login(user)">Login</button>
+        <div class="alert alert-danger" ng-show="auth.error">
+            <strong>Error!</strong> {{ auth.message }}
+        </div>
     </form>
 </div>

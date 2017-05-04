@@ -1,19 +1,24 @@
-(function() {
-'use strict';
+(function () {
+    'use strict';
 
     angular
         .module('admin.auth', [])
         .controller('AuthCtrl', AuthCtrl);
 
-    //AuthCtrl.inject = ['dependency1'];
+    AuthCtrl.inject = ['$location', 'BasicAuth'];
 
-    function AuthCtrl() {
+    function AuthCtrl($location, BasicAuth) {
         var vm = this;
-        
-        activate();
+        vm.user = {};
+        vm.error = false;
+        vm.message = '';
+        vm.login = login;
 
         ////////////////
 
-        function activate() { }
+        function login(user) {
+            BasicAuth.setConnection(true);
+            $location.path('/bienvenue');
+        }
     }
 })();

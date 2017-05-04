@@ -1,1 +1,28 @@
-users.html
+<h2>Users</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4">
+            <ul ng-repeat="user in users.users">
+                <li ng-click="users.chargeUser(user)">{{ user._id }}</li>
+            </ul>
+        </div>
+        <div class="col-lg-8">
+            <div class="form">
+                <form method="post" id="contactFrm" name="contactFrm">
+                    <label for="id">ID: {{ users.editUser._id }}</label><br />
+                    <input type="text" required="" ng-model="users.editUser.username" class="txt">
+                    <input type="text" required="" ng-model="users.editUser.password" class="txt">
+                    <input type="submit" value="submit" ng-click="users.manageUser(users.editUser)" class="txt2">
+                    <input type="submit" value="reset" ng-click="users.resetUser()" class="txt2">
+                    <input type="submit" value="Delete" ng-click="users.deleteUser(users.editUser)" class="txt2">
+                    <div class="alert alert-success" ng-show="users.success">
+                        <strong>Success!</strong> {{ users.message }}
+                    </div>
+                    <div class="alert alert-danger" ng-show="users.error">
+                        <strong>Error!</strong> {{ users.message }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
