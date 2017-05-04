@@ -58,6 +58,13 @@
         }
 
         function managePost(post) {
+
+            var mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+            var date = new Date();
+
+            post.user = 'Anonymous';
+            post.date = date.getDate() + ' ' + mois[date.getMonth()] + ' à ' + date.getHours() + 'H' + date.getMinutes();
+
             if (post._id) { // Update
                 Post.upd(post).then(function (data) {
                     vm.success = true;
@@ -73,12 +80,6 @@
                 if (post.title === undefined) {
                     return;
                 }
-
-                var mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
-                var date = new Date();
-
-                post.user = 'Anonymous';
-                post.date = date.getDate() + ' ' + mois[date.getMonth()] + ' à ' + date.getHours() + 'H' + date.getMinutes();
 
                 Post.add(post).then(function (data) {
                     vm.success = true;
