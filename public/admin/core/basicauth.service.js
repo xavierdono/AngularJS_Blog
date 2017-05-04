@@ -7,7 +7,7 @@
 
     function BasicAuth() {
 
-        var connected = true;
+        var auth = true;
 
         var service = {
             isConnected: isConnected,
@@ -17,11 +17,11 @@
         return service;
 
         function isConnected() {
-            return connected;
+            return auth;
         }
 
-        function setConnection(connexion) {
-            connected = connexion;
+        function setConnection(authentified) {
+            auth = authentified;
         }
     }
 })();
