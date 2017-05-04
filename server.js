@@ -7,7 +7,8 @@ var mongoose = require('mongoose');                     // mongoose for mongodb
 var morgan = require('morgan');             // log requests to the console (express4)
 var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
 var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
-var config = require('./config/config.js'); // simulate DELETE and PUT (express4)
+var config = require('./config/config'); // config of mongodb
+var Post = require('./models/Post');
 
 // configuration =================
 var db = 'mongodb://' + config.username + ':' + config.password + '@' + config.host + ':' + config.port + '/' + config.db;
@@ -20,74 +21,114 @@ app.use(bodyParser.json());                                     // parse applica
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
 
-// Model
-var Post = mongoose.model('Post', {
-    title: String,
-    desc: String,
-    body: String,
-    user: String,
-    date: String
+var router = express.Router();
+
+/*
+
+Route	            HTTP Verb	    Description
+/                   *               Front-End
+/api/posts	        GET	            Get all the posts.
+/api/posts	        POST	        Create a post.
+/api/posts/:post_id GET	            Get a single post.
+/api/posts/:post_id PUT	            Update a post with new info.
+/api/posts/:post_id DELETE	        Delete a post.
+
+*/
+
+// Route Front-End
+app.get('/', function (req, res) {
+    res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
 });
 
-// Routes API
-app.get('/api/posts/:id', function (req, res) {
 
-    // use mongoose to get the post in the database
-    Post.findById(req.params.id, function (err, post) {
+// on routes that end in /posts
+// ----------------------------------------------------
+router.route('/posts')
 
-        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
-        if (err) {
-            res.send(err);
-        }
+    // create a post (accessed at POST http://localhost:8080/api/posts)
+    .post(function (req, res) {
 
-        res.json(post); // return the post in JSON format
-    });
-});
+        var post = new Post();      // create a new instance of the Post model
+        post.title = req.body.title;
+        post.desc = req.body.desc;
+        post.body = req.body.body;
+        post.user = req.body.user;
+        post.date = req.body.date;
 
-app.get('/api/posts', function (req, res) {
-
-    // use mongoose to get all posts in the database
-    Post.find(function (err, posts) {
-
-        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
-        if (err) {
-            res.send(err);
-        }
-
-        res.json(posts); // return all posts in JSON format
-    });
-});
-
-app.post('/api/posts', function (req, res) {
-
-    // create a post, information comes from AJAX request from Angular
-    Post.create({
-        title: req.body.title,
-        desc: req.body.desc,
-        body: req.body.body,
-        user: req.body.user,
-        date: req.body.date
-    }, function (err, todo) {
-        if (err) {
-            res.send(err);
-        }
-
-        // get and return all the posts after you create another
-        Post.find(function (err, posts) {
-            if (err) {
+        // save the post and check for errors
+        post.save(function (err) {
+            if (err)
                 res.send(err);
-            }
+
+            res.json({ message: 'Post created!' });
+        });
+
+    })
+
+    // get all the posts (accessed at GET http://localhost:8080/api/posts)
+    .get(function (req, res) {
+        Post.find(function (err, posts) {
+            if (err)
+                res.send(err);
 
             res.json(posts);
         });
     });
 
-});
+// on routes that end in /posts/:post_id
+// ----------------------------------------------------
+router.route('/posts/:post_id')
 
-// Route Front-End
-app.get('', function (req, res) {
-    res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
-});
+    // get the post with that id (accessed at GET http://localhost:8080/api/posts/:post_id)
+    .get(function (req, res) {
+        Post.findById(req.params.post_id, function (err, post) {
+            if (err)
+                res.send(err);
+            res.json(post);
+        });
+    })
+
+    // update the post with this id (accessed at PUT http://localhost:8080/api/posts/:post_id)
+    .put(function (req, res) {
+
+        // use our post model to find the post we want
+        Post.findById(req.params.post_id, function (err, post) {
+
+            if (err)
+                res.send(err);
+
+            // update the post info
+            post.title = req.body.title;
+            post.desc = req.body.desc;
+            post.body = req.body.body;
+            post.user = req.body.user;
+            post.date = req.body.date;
+
+            // save the bear
+            post.save(function (err) {
+                if (err)
+                    res.send(err);
+
+                res.json({ message: 'Post updated!' });
+            });
+
+        });
+    })
+
+    // delete the post with this id (accessed at DELETE http://localhost:8080/api/posts/:post_id)
+    .delete(function (req, res) {
+        Post.remove({
+            _id: req.params.post_id
+        }, function (err, bear) {
+            if (err)
+                res.send(err);
+
+            res.json({ message: 'Successfully deleted' });
+        });
+    });
+
+app.use('/api', router);
+
 
 // listen (start app with node server.js) ======================================
 app.listen(8080);
