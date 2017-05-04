@@ -4,6 +4,19 @@ Faire un blog en Angular + FireBase (1/2 commit) / MongoDB (dernier commit)
 
 * nodemon .\server.js
 
+**Config:**
+
+create config/config.js
+
+var config = {
+    username: "username",
+    password: "password",
+    host: "host",
+    port: "port",
+    db: "db"
+};
+
+module.exports = config;
 
 ## [Start Bootstrap](http://startbootstrap.com/) - [Clean Blog](http://startbootstrap.com/template-overviews/clean-blog/)
 
