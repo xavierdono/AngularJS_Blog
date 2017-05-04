@@ -12,6 +12,8 @@
         var service = {
             all: allPosts,
             add: createPost,
+            del: deletePostById,
+            upd: updatePost,
             id: getPostById
         };
 
@@ -53,9 +55,33 @@
             var deferred = $q.defer();
 
             $http.post(cmd, post).then(function (response) {
-                deferred.resolve({
-                    posts: response.data
-                });
+                deferred.resolve(response.data);
+            }).catch(function (msg) {
+                deferred.reject(msg);
+            });
+
+            return deferred.promise;
+        }
+
+        function updatePost(post) { 
+            var cmd = "/api/posts/" + post._id;
+            var deferred = $q.defer();
+
+            $http.put(cmd, post).then(function (response) {
+                deferred.resolve(response.data);
+            }).catch(function (msg) {
+                deferred.reject(msg);
+            });
+
+            return deferred.promise;
+        }
+
+        function deletePostById(id_post) { 
+            var cmd = "/api/posts/" + id_post;
+            var deferred = $q.defer();
+
+            $http.delete(cmd).then(function (response) {
+                deferred.resolve(response.data);
             }).catch(function (msg) {
                 deferred.reject(msg);
             });

@@ -9,6 +9,7 @@
 
     function PostsCtrl(Post) {
         var vm = this;
+        vm.message = '';
         vm.success = false;
         vm.error = false;
         vm.posts = [];
@@ -31,27 +32,45 @@
         }
 
         function chargePost(post) {
+            vm.message = '';
             vm.success = false;
             vm.error = false;
             vm.editPost = post;
         }
 
         function resetPost(post) {
+            vm.message = '';
             vm.success = false;
             vm.error = false;
             vm.editPost = {};
         }
 
         function deletePost(post) {
-            
+            Post.del(post._id).then(function (data) {
+                vm.success = true;
+                vm.message = data.message;
+                vm.editPost = {};
+                activate();
+            }).catch(function (data) {
+                vm.error = true;
+                vm.message = data;
+            });
         }
 
         function managePost(post) {
             if (post._id) { // Update
-                vm.success = true;
+                Post.upd(post).then(function (data) {
+                    vm.success = true;
+                    vm.message = data.message;
+                    vm.editPost = {};
+                    activate();
+                }).catch(function (data) {
+                    vm.error = true;
+                    vm.message = data;
+                });
             } else { // Create
 
-                if(post.title === undefined) {
+                if (post.title === undefined) {
                     return;
                 }
 
@@ -63,15 +82,14 @@
 
                 Post.add(post).then(function (data) {
                     vm.success = true;
-
+                    vm.message = data.message;
+                    vm.editPost = {};
                     activate();
                 }).catch(function (data) {
                     vm.error = true;
-                    console.log('catch: ', data);
+                    vm.message = data;
                 });
             }
-
-            vm.editPost = {};
         }
     }
 })();

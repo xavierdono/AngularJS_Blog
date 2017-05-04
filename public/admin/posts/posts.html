@@ -18,10 +18,10 @@
                     <input type="submit" value="reset" ng-click="posts.resetPost()" class="txt2">
                     <input type="submit" value="Delete" ng-click="posts.deletePost(posts.editPost)" class="txt2">
                     <div class="alert alert-success" ng-show="posts.success">
-                        <strong>Success!</strong> Post saved!
+                        <strong>Success!</strong> {{ posts.message }}
                     </div>
                     <div class="alert alert-danger" ng-show="posts.error">
-                        <strong>Error!</strong> Post not saved!
+                        <strong>Error!</strong> {{ posts.message }}
                     </div>
                 </form>
             </div>
