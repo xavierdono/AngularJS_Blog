@@ -4,6 +4,7 @@
     angular.module('admin',
         [
             'ngRoute',
+            'ngMaterial',
 
             'admin.auth',
             'admin.basicauth',

@@ -1,15 +1,26 @@
-<div class="wrapper_auth">
-    <form method="post" name="Login_Form" class="form-signin">
-        <h3 class="form-signin-heading">Bienvenue</h3>
-        <hr class="colorgraph"><br>
-
-        <input type="text" class="form-control" name="Username" ng-model="user.username" placeholder="Username" required="" autofocus=""
-        />
-        <input type="password" class="form-control" name="Password" ng-model="user.password" placeholder="Password" required="" />
-
-        <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" ng-click="auth.login(user)">Login</button>
-        <div class="alert alert-danger" ng-show="auth.error">
-            <strong>Error!</strong> {{ auth.message }}
-        </div>
-    </form>
-</div>
+<md-content layout="row" layout-align="space-around" layout-padding="layout-padding" ng-cloak="ng-cloak" class="login-form">
+    <md-card flex="flex">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2><span>Bienvenue</span></h2>
+            </div>
+        </md-toolbar>
+        <md-card-content>
+            <form name="Form">
+                <md-input-container class="md-block">
+                    <label for="id">Utilisateur</label>
+                    <input type="text" class="form-control" name="Username" ng-model="user.username" placeholder="Username" required="" autofocus=""
+                    />
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label for="id">Mot de passe</label>
+                    <input type="password" class="form-control" name="Password" ng-model="user.password" placeholder="Password" required="" />
+                </md-input-container>
+                <md-button class="md-primary md-raised" ng-click="auth.login(user)">Se Connecter</md-button>
+                <div md-colors="{color: 'red-500', 'border-color': 'primary-500'}" ng-show="auth.error">
+                    <strong>Error!</strong> {{ auth.message }}
+                </div>
+            </form>
+        </md-card-content>
+    </md-card>
+</md-content>

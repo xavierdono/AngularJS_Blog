@@ -1,28 +1,43 @@
-<h2>Users</h2>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-4">
-            <ul ng-repeat="user in users.users">
-                <li ng-click="users.chargeUser(user)">{{ user._id }}</li>
-            </ul>
-        </div>
-        <div class="col-lg-8">
-            <div class="form">
-                <form method="post" id="contactFrm" name="contactFrm">
-                    <label for="id">ID: {{ users.editUser._id }}</label><br />
-                    <input type="text" required="" ng-model="users.editUser.username" class="txt">
-                    <input type="text" required="" ng-model="users.editUser.password" class="txt">
-                    <input type="submit" value="submit" ng-click="users.manageUser(users.editUser)" class="txt2">
-                    <input type="submit" value="reset" ng-click="users.resetUser()" class="txt2">
-                    <input type="submit" value="Delete" ng-click="users.deleteUser(users.editUser)" class="txt2">
-                    <div class="alert alert-success" ng-show="users.success">
-                        <strong>Success!</strong> {{ users.message }}
-                    </div>
-                    <div class="alert alert-danger" ng-show="users.error">
-                        <strong>Error!</strong> {{ users.message }}
-                    </div>
-                </form>
+<h3>Users</h3>
+<div layout="row" flex>
+
+    <md-list>
+        <md-list-item ng-repeat="user in users.users">
+            <md-button ng-click="users.chargeUser(user)">{{ user._id }}</md-button>
+        </md-list-item>
+    </md-list>
+
+    <md-content id="content">
+        <form method="post" id="contactFrm" name="contactFrm">
+
+            <label for="id">ID: <strong>{{ users.editUser._id }}</strong></label>
+
+            <br><br>
+
+            <md-input-container class="md-block">
+                <label for="id">Utilisateur</label>
+                <input type="text" required="" ng-model="users.editUser.username" class="txt">
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label for="id">Mot de passe</label>
+                <input type="text" required="" ng-model="users.editUser.password" class="txt">
+            </md-input-container>
+
+            <md-button class="md-primary md-raised" ng-click="users.manageUser(users.editUser)">Enregistrer</md-button>
+            <md-button class="md-raised" ng-click="users.resetUser()">Annuler</md-button>
+            <md-button class="md-warn md-raised" ng-click="users.deleteUser(users.editUser)">Supprimer</md-button>
+
+            <br><br>
+
+            <div md-colors="{color: 'green-500', 'border-color': 'primary-500'}" ng-show="users.success">
+                <strong>Success!</strong> {{ users.message }}
             </div>
-        </div>
-    </div>
+            <div md-colors="{color: 'red-500', 'border-color': 'primary-500'}" ng-show="users.error">
+                <strong>Error!</strong> {{ users.message }}
+            </div>
+
+        </form>
+    </md-content>
+
 </div>
