@@ -1,6 +1,6 @@
 # Tutorial
 
-Faire un blog en Angular + FireBase (1/2 commit) / MongoDB (dernier commit)
+Faire un blog en AngularJS + FireBase (1/2 commit) / MongoDB (dernier commit)
 
 * nodemon .\server.js
 
